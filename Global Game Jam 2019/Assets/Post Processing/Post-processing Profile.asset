@@ -77,13 +77,13 @@ MonoBehaviour:
     value: 1
   colored:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 0.09
+    value: 0.125
   size:
     overrideState: 1
-    value: 1.39
+    value: 1.58
   lumContrib:
     overrideState: 1
     value: 0.23
