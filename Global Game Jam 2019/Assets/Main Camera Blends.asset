@@ -24,11 +24,11 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
+  - m_From: CM vcam1
     m_To: CM vcam bear
     m_Blend:
       m_Style: 1
-      m_Time: 3
+      m_Time: 4
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -51,6 +51,17 @@ MonoBehaviour:
     m_Blend:
       m_Style: 1
       m_Time: 8
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CM vcam1
+    m_To: CM vcam home
+    m_Blend:
+      m_Style: 1
+      m_Time: 4
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
