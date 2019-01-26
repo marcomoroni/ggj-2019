@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public enum DialogueID
 {
+	Intro,
 	WithBear,
 	WithButterfly
 }
@@ -30,22 +31,56 @@ public class DialogueManager : MonoBehaviour
 	private void Awake()
 	{
 		// Create all the dialogues
+
+		dialogues.Add(DialogueID.Intro, new Dialogue());
+		dialogues[DialogueID.Intro].sentences.Add(new Sentence(playerSpeaker, "Whoopsiedaisies."));
+		dialogues[DialogueID.Intro].sentences.Add(new Sentence(playerSpeaker, "I lost my way home."));
+		dialogues[DialogueID.Intro].sentences.Add(new Sentence(playerSpeaker, "I'd like to go home."));
+
 		dialogues.Add(DialogueID.WithBear, new Dialogue());
-		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Hello"));
-		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Hello to you"));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Hello."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Hello to you."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "I lost my way home."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Do you know how can I get home?"));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Where do you live?"));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "At home."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "I'm afraid I don't know where it is."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Butterfly knows a lot of things."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Perhaps Butterfly knows where your home is."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Thank you."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "You're welcome."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Do you like honey?"));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Yes I do."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "I hope you will find some honey today."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Thank you."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Goodbye to you."));
 
 		dialogues.Add(DialogueID.WithButterfly, new Dialogue());
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Hi"));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Hi to you"));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Hello."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Hello."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Are you butterfly?"));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Yes I am."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Do you know how can I get home?"));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Where do you live?"));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "At home."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "I know where it is."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Keep walking and you'll find it."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Thank you. You really know a lot of things."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Thank you."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Goodbye."));
 	}
 
-	public void StartDialogue(DialogueID dialogueID)
+	public void StartDialogue(DialogueID dialogueID, bool auto = false)
 	{
 		dialogueStarted.Invoke();
-		StartCoroutine(TypeDialogue(dialogues[dialogueID]));
+		StartCoroutine(TypeDialogue(dialogues[dialogueID], auto));
 	}
 
-	IEnumerator TypeDialogue(Dialogue dialogue)
+	IEnumerator TypeDialogue(Dialogue dialogue, bool auto)
 	{
 		foreach (Sentence sentence in dialogue.sentences)
 		{
@@ -65,13 +100,18 @@ public class DialogueManager : MonoBehaviour
 				yield return new WaitForSeconds(typeTime);
 			}
 
-			yield return new WaitForSeconds(1f);
-			textDisplay.text += "   >";
+			if (auto)
+				yield return new WaitForSeconds(3f);
+			else
+			{
+				yield return new WaitForSeconds(0.6f);
+				textDisplay.text += "   >";
 
-			yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
+				yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
+			}
+
+			textDisplay.text = "";
 		}
-
-		textDisplay.text = "";
 		dialogueFinished.Invoke();
 	}
 }

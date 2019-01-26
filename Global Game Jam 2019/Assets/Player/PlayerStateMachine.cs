@@ -18,8 +18,9 @@ public class PlayerStateMachine : FiniteStateMachine
 
 	private void Awake()
 	{
-		InitializeFiniteStateMachine<PlayerStates>(PlayerStates.Normal);
-		AddTransitionsToState(PlayerStates.Normal, new Enum[] { PlayerStates.Dialogue });
+		InitializeFiniteStateMachine<PlayerStates>(PlayerStates.Frozen);
+		AddTransitionsToState(PlayerStates.Frozen, new Enum[] { PlayerStates.Normal });
+		AddTransitionsToState(PlayerStates.Normal, new Enum[] { PlayerStates.Dialogue, PlayerStates.Normal });
 		AddTransitionsToState(PlayerStates.Dialogue, new Enum[] { PlayerStates.Normal });
 
 		_playerController2D = GetComponent<PlayerController2D>();
@@ -31,6 +32,7 @@ public class PlayerStateMachine : FiniteStateMachine
 		PlayerInteractionArea.triggerDialogueAreaEnter.AddListener(OnInteractionAreaEnter);
 		PlayerInteractionArea.triggerDialogueAreaExit.AddListener(OnInteractionAreaExit);
 		DialogueManager.dialogueFinished.AddListener(OnDialogueFinished);
+		MainGameManager.introFinished.AddListener(OnIntroFinished);
 	}
 
 	void UpdateNormal()
@@ -72,9 +74,14 @@ public class PlayerStateMachine : FiniteStateMachine
 		dialogueAvailable = null;
 		ChangeCurrentState(PlayerStates.Normal);
 	}
+
+	private void OnIntroFinished()
+	{
+		ChangeCurrentState(PlayerStates.Normal);
+	}
 }
 
 public enum PlayerStates
 {
-	Normal, Dialogue
+	Frozen, Normal, Dialogue
 }
