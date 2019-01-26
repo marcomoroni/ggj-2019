@@ -54,17 +54,18 @@ public class DialogueManager : MonoBehaviour
 			// Print name only if not player
 			if (sentence.speaker != playerSpeaker)
 			{
-				textDisplay.text = sentence.speaker.name + ": ";
+				textDisplay.text = sentence.speaker.name + ":  ";
 				yield return new WaitForSeconds(typeTime);
 			}
 
 			foreach (char letter in sentence.sentence)
 			{
 				textDisplay.text += letter;
+				if (letter != ' ') // don't wait if space
 				yield return new WaitForSeconds(typeTime);
 			}
 
-			yield return new WaitForSeconds(0.4f);
+			yield return new WaitForSeconds(1f);
 			textDisplay.text += "   >";
 
 			yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
