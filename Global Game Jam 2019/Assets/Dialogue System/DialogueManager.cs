@@ -7,7 +7,8 @@ using UnityEngine.Events;
 
 public enum DialogueID
 {
-	Test1
+	WithBear,
+	WithButterfly
 }
 
 public class DialogueManager : MonoBehaviour
@@ -29,9 +30,13 @@ public class DialogueManager : MonoBehaviour
 	private void Awake()
 	{
 		// Create all the dialogues
-		dialogues.Add(DialogueID.Test1, new Dialogue());
-		dialogues[DialogueID.Test1].sentences.Add(new Sentence(playerSpeaker, "Hello"));
-		dialogues[DialogueID.Test1].sentences.Add(new Sentence(bearSpeaker, "Hello to you"));
+		dialogues.Add(DialogueID.WithBear, new Dialogue());
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Hello"));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Hello to you"));
+
+		dialogues.Add(DialogueID.WithButterfly, new Dialogue());
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Hi"));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Hi to you"));
 	}
 
 	public void StartDialogue(DialogueID dialogueID)
@@ -59,6 +64,7 @@ public class DialogueManager : MonoBehaviour
 				yield return new WaitForSeconds(typeTime);
 			}
 
+			yield return new WaitForSeconds(0.4f);
 			textDisplay.text += "   >";
 
 			yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
@@ -67,16 +73,6 @@ public class DialogueManager : MonoBehaviour
 		textDisplay.text = "";
 		dialogueFinished.Invoke();
 	}
-
-	// TEST ONLY
-	/*private void Update()
-	{
-		// Continue dialogue
-		if (Input.GetKeyDown("d"))
-		{
-			StartDialogue(DialogueID.Test1);
-		}
-	}*/
 }
 
 public class Speaker
