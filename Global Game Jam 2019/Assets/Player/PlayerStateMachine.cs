@@ -7,6 +7,7 @@ using System;
 public class PlayerStateMachine : FiniteStateMachine
 {
 	PlayerController2D _playerController2D;
+	Animator _animator;
 
 	public float walkSpeed = 40f;
 
@@ -19,6 +20,7 @@ public class PlayerStateMachine : FiniteStateMachine
 		AddTransitionsToState(PlayerStates.Dialogue, new Enum[] { PlayerStates.Normal });
 
 		_playerController2D = GetComponent<PlayerController2D>();
+		_animator = GetComponent<Animator>();
 	}
 
 	void UpdateNormal()
@@ -30,6 +32,13 @@ public class PlayerStateMachine : FiniteStateMachine
 	{
 		// Move our character
 		_playerController2D.Move(_horizontalMove * Time.fixedDeltaTime);
+	}
+
+	protected override void Update()
+	{
+		base.Update();
+
+		_animator.SetFloat("velocity", Math.Abs(_horizontalMove));
 	}
 }
 
