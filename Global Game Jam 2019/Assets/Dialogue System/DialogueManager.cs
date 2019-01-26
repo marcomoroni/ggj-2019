@@ -23,8 +23,8 @@ public class DialogueManager : MonoBehaviour
 	private void Awake()
 	{
 		// Create speakers
-		Speaker playerSpeaker = new Speaker("Triangle", new Color(229, 182, 255));
-		Speaker npc1 = new Speaker("NPC1", new Color(217, 59, 120));
+		Speaker playerSpeaker = new Speaker("Triangle", new Color(.898f, .713f, 1));
+		Speaker npc1 = new Speaker("NPC1", new Color(.850f, .231f, .470f));
 
 		// Create all the dialogues
 		dialogues.Add(DialogueID.Test1, new Dialogue());
@@ -41,9 +41,10 @@ public class DialogueManager : MonoBehaviour
 	{
 		foreach (Sentence sentence in dialogue.sentences)
 		{
-			textDisplay.text = "";
-
 			textDisplay.color = sentence.speaker.color;
+
+			textDisplay.text = sentence.speaker.name + ": ";
+			yield return new WaitForSeconds(typeTime);
 
 			foreach (char letter in sentence.sentence)
 			{
@@ -51,19 +52,27 @@ public class DialogueManager : MonoBehaviour
 				yield return new WaitForSeconds(typeTime);
 			}
 
-			yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
+			// If last sentence
+			if (sentence == dialogue.sentences[dialogue.sentences.Count - 1])
+			{
+				dialogueFinished.Invoke();
+			}
+			else
+			{
+				yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
+			}
 		}
 	}
 
 	// TEST ONLY
-	private void Update()
+	/*private void Update()
 	{
 		// Continue dialogue
 		if (Input.GetKeyDown("d"))
 		{
 			StartDialogue(DialogueID.Test1);
 		}
-	}
+	}*/
 }
 
 public class Speaker

@@ -5214,7 +5214,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Did you happen to see my keys?
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9583da9a4821c4ca1867b999f34f04c4, type: 2}
   m_sharedMaterial: {fileID: 21771205229903366, guid: 9583da9a4821c4ca1867b999f34f04c4,
@@ -5284,13 +5284,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -870.48114, w: 0}
   m_textInfo:
     textComponent: {fileID: 992582957}
-    characterCount: 30
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
