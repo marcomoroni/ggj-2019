@@ -8,10 +8,13 @@ public class PlayerStateMachine : FiniteStateMachine
 {
 	PlayerController2D _playerController2D;
 	Animator _animator;
+	public DialogueManager dialogueManager;
 
 	public float walkSpeed = 40f;
 
 	private float _horizontalMove = 0f;
+
+	public DialogueID? dialogueAvailable = null;
 
 	private void Awake()
 	{
@@ -23,9 +26,22 @@ public class PlayerStateMachine : FiniteStateMachine
 		_animator = GetComponent<Animator>();
 	}
 
+	private void Start()
+	{
+		PlayerInteractionArea.triggerDialogueAreaEnter.AddListener(OnInteractionAreaEnter);
+		PlayerInteractionArea.triggerDialogueAreaExit.AddListener(OnInteractionAreaExit);
+		DialogueManager.dialogueFinished.AddListener(OnDialogueFinished);
+	}
+
 	void UpdateNormal()
 	{
 		_horizontalMove = Input.GetAxisRaw("Horizontal") * walkSpeed;
+
+		if (dialogueAvailable != null && Input.GetKeyDown("space"))
+		{
+			dialogueManager.StartDialogue(dialogueAvailable.GetValueOrDefault());
+			ChangeCurrentState(PlayerStates.Dialogue);
+		}
 	}
 
 	void FixedUpdateNormal()
@@ -39,6 +55,22 @@ public class PlayerStateMachine : FiniteStateMachine
 		base.Update();
 
 		_animator.SetFloat("velocity", Math.Abs(_horizontalMove));
+	}
+
+	private void OnInteractionAreaEnter(DialogueID dialogueID)
+	{
+		dialogueAvailable = dialogueID;
+	}
+
+	private void OnInteractionAreaExit(DialogueID dialogueID)
+	{
+		dialogueAvailable = null;
+	}
+
+	private void OnDialogueFinished()
+	{
+		dialogueAvailable = null;
+		ChangeCurrentState(PlayerStates.Normal);
 	}
 }
 

@@ -18,22 +18,25 @@ public class DialogueManager : MonoBehaviour
 
 	public float typeTime = 0.2f;
 
-	public UnityEvent dialogueFinished = new UnityEvent();
+	public static UnityEvent dialogueStarted = new UnityEvent();
+	public static UnityEvent dialogueFinished = new UnityEvent();
+
+	// Speakers
+	private readonly Speaker playerSpeaker = new Speaker("Triangle", new Color(.898f, .713f, 1));
+	private readonly Speaker bearSpeaker = new Speaker("Bear", new Color(.490f, .407f, 1f));
+	private readonly Speaker butterflySpeaker = new Speaker("Butterfly", new Color(.850f, .231f, .470f));
 
 	private void Awake()
 	{
-		// Create speakers
-		Speaker playerSpeaker = new Speaker("Triangle", new Color(.898f, .713f, 1));
-		Speaker npc1 = new Speaker("NPC1", new Color(.850f, .231f, .470f));
-
 		// Create all the dialogues
 		dialogues.Add(DialogueID.Test1, new Dialogue());
 		dialogues[DialogueID.Test1].sentences.Add(new Sentence(playerSpeaker, "Hello"));
-		dialogues[DialogueID.Test1].sentences.Add(new Sentence(npc1, "Hello to you"));
+		dialogues[DialogueID.Test1].sentences.Add(new Sentence(bearSpeaker, "Hello to you"));
 	}
 
 	public void StartDialogue(DialogueID dialogueID)
 	{
+		dialogueStarted.Invoke();
 		StartCoroutine(TypeDialogue(dialogues[dialogueID]));
 	}
 
@@ -43,8 +46,12 @@ public class DialogueManager : MonoBehaviour
 		{
 			textDisplay.color = sentence.speaker.color;
 
-			textDisplay.text = sentence.speaker.name + ": ";
-			yield return new WaitForSeconds(typeTime);
+			// Print name only if not player
+			if (sentence.speaker != playerSpeaker)
+			{
+				textDisplay.text = sentence.speaker.name + ": ";
+				yield return new WaitForSeconds(typeTime);
+			}
 
 			foreach (char letter in sentence.sentence)
 			{
@@ -52,16 +59,13 @@ public class DialogueManager : MonoBehaviour
 				yield return new WaitForSeconds(typeTime);
 			}
 
-			// If last sentence
-			if (sentence == dialogue.sentences[dialogue.sentences.Count - 1])
-			{
-				dialogueFinished.Invoke();
-			}
-			else
-			{
-				yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
-			}
+			textDisplay.text += "   >";
+
+			yield return new WaitUntil(() => { return Input.GetKeyDown("space"); });
 		}
+
+		textDisplay.text = "";
+		dialogueFinished.Invoke();
 	}
 
 	// TEST ONLY
