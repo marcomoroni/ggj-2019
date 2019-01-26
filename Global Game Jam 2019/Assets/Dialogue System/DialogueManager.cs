@@ -59,19 +59,18 @@ public class DialogueManager : MonoBehaviour
 
 		dialogues.Add(DialogueID.WithButterfly, new Dialogue());
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Hello."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Hello."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Are you Butterfly?"));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Yes I am."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Hi."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "I lost my way home."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Do you know how can I get home?"));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Where do you live?"));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "At home."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "I know where it is."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Keep walking and you'll find it."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Thank you. You really know a lot of things."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Thank you. I like to learn a lot of things."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Thanks. I like to learn a lot of things."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Goodbye."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Bye."));
 	}
 
 	public void StartDialogue(DialogueID dialogueID, bool auto = false)
