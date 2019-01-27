@@ -39,7 +39,7 @@ public class MainGameManager : FiniteStateMachine
 
 		dialogueManager.StartDialogue(DialogueID.Intro, true);
 
-		yield return new WaitForSeconds(10.0f);
+		yield return new WaitForSeconds(7.9f);
 
 		introCamera.SetActive(false);
 
@@ -78,6 +78,8 @@ public class MainGameManager : FiniteStateMachine
 
 	private IEnumerator OutroCutscene()
 	{
+		yield return new WaitForSeconds(1.0f);
+
 		dialogueManager.StartDialogue(DialogueID.Outro, true);
 
 		yield return new WaitForSeconds(5.0f);
@@ -98,7 +100,7 @@ public class MainGameManager : FiniteStateMachine
 			yield return null;
 		}
 
-		yield return new WaitForSeconds(4.0f); // Guess timing
+		yield return new WaitForSeconds(2.0f); // Guess timing
 
 		endText.SetActive(true);
 	}

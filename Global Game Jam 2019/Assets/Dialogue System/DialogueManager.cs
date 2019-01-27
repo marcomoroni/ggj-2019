@@ -50,11 +50,11 @@ public class DialogueManager : MonoBehaviour
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Perhaps Butterfly knows where your home is."));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Thank you."));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "You're welcome."));
-		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Do you like honey?"));
+		/*dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "Do you like honey?"));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Yes I do."));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "I hope you will find some honey today."));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Thank you."));
-		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
+		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));*/
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
 		dialogues[DialogueID.WithBear].sentences.Add(new Sentence(bearSpeaker, "Goodbye to you."));
 
