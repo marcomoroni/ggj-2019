@@ -64,5 +64,6 @@ public class MainGameManager : FiniteStateMachine
 public enum MainGameManagerState
 {
 	Intro,
-	Playing
+	Playing,
+	Outro
 }
