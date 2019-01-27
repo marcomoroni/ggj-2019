@@ -68,8 +68,7 @@ public class DialogueManager : MonoBehaviour
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "I know where it is."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Keep walking and you'll find it."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "Thank you. You really know a lot of things."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Thanks. I like to learn a lot of things."));
-		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
+		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "I like to learn a lot of things."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Bye."));
 
@@ -77,7 +76,7 @@ public class DialogueManager : MonoBehaviour
 		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "Oh."));
 		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "I found my home."));
 		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "Hurray."));
-		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "I think I'll have a tea now."));
+		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "I think I'll have a cup of tea now."));
 	}
 
 	public void StartDialogue(DialogueID dialogueID, bool auto = false)
