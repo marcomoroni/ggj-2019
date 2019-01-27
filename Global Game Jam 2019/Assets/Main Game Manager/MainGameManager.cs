@@ -11,6 +11,9 @@ public class MainGameManager : FiniteStateMachine
 	public Image overlay;
 	public GameObject introCamera;
 	public DialogueManager dialogueManager;
+	public GameObject endText;
+
+	public GameObject wallOutro;
 
 	public static UnityEvent introFinished = new UnityEvent();
 
@@ -20,6 +23,9 @@ public class MainGameManager : FiniteStateMachine
 
 		InitializeFiniteStateMachine<MainGameManagerState>(MainGameManagerState.Intro);
 		AddTransitionsToState(MainGameManagerState.Intro, new Enum[] { MainGameManagerState.Playing });
+		AddTransitionsToState(MainGameManagerState.Playing, new Enum[] { MainGameManagerState.Outro });
+
+		OutroTrigger.outroTriggered.AddListener(OnOutroTrigger);
 	}
 
 	private void Start()
@@ -49,7 +55,6 @@ public class MainGameManager : FiniteStateMachine
 	{
 		while (overlay.color.a > 0)
 		{
-			//overlay.color.a -= 0.2f * Time.deltaTime;
 			overlay.color = new Color(
 				0.07450981f,
 				0.03921569f,
@@ -58,6 +63,44 @@ public class MainGameManager : FiniteStateMachine
 
 			yield return null;
 		}
+	}
+
+	private void OnOutroTrigger()
+	{
+		ChangeCurrentState(MainGameManagerState.Outro);
+	}
+
+	void EnterOutro(Enum previousState)
+	{
+		wallOutro.SetActive(true);
+		StartCoroutine(OutroCutscene());
+	}
+
+	private IEnumerator OutroCutscene()
+	{
+		dialogueManager.StartDialogue(DialogueID.Outro, true);
+
+		yield return new WaitForSeconds(5.0f);
+
+		StartCoroutine(FadeInOverlay());
+	}
+
+	private IEnumerator FadeInOverlay()
+	{
+		while (overlay.color.a < 1)
+		{
+			overlay.color = new Color(
+				0.07450981f,
+				0.03921569f,
+				0.1568628f,
+				overlay.color.a + 0.1f * Time.deltaTime);
+
+			yield return null;
+		}
+
+		yield return new WaitForSeconds(4.0f); // Guess timing
+
+		endText.SetActive(true);
 	}
 }
 

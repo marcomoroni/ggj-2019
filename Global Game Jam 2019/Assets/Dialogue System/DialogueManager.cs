@@ -9,7 +9,8 @@ public enum DialogueID
 {
 	Intro,
 	WithBear,
-	WithButterfly
+	WithButterfly,
+	Outro
 }
 
 public class DialogueManager : MonoBehaviour
@@ -71,6 +72,12 @@ public class DialogueManager : MonoBehaviour
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "You're welcome."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(playerSpeaker, "I have to go now. Goodbye."));
 		dialogues[DialogueID.WithButterfly].sentences.Add(new Sentence(butterflySpeaker, "Bye."));
+
+		dialogues.Add(DialogueID.Outro, new Dialogue());
+		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "Oh."));
+		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "I found my home."));
+		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "Hurray."));
+		dialogues[DialogueID.Outro].sentences.Add(new Sentence(playerSpeaker, "I think I'll have a tea now."));
 	}
 
 	public void StartDialogue(DialogueID dialogueID, bool auto = false)
