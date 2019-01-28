@@ -272,7 +272,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Global Game Jame 2019
+  m_text: Global Game Jam 2019
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9583da9a4821c4ca1867b999f34f04c4, type: 2}
   m_sharedMaterial: {fileID: 21771205229903366, guid: 9583da9a4821c4ca1867b999f34f04c4,
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0.23360649, w: 0}
   m_textInfo:
     textComponent: {fileID: 114235341}
-    characterCount: 21
+    characterCount: 20
     spriteCount: 0
     spaceCount: 3
     wordCount: 4
