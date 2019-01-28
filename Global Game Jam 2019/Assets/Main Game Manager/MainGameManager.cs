@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainGameManager : FiniteStateMachine
 {
@@ -103,6 +104,14 @@ public class MainGameManager : FiniteStateMachine
 		yield return new WaitForSeconds(2.0f); // Guess timing
 
 		endText.SetActive(true);
+
+		yield return new WaitForSeconds(4f);
+
+		endText.SetActive(false);
+
+		yield return new WaitForSeconds(1f);
+
+		SceneManager.LoadScene(0);
 	}
 }
 

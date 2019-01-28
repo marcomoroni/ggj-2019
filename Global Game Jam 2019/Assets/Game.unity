@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf5db5f758b24c5997c3e1c2a1980f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeNeeded: 3
+  timeNeeded: 1
 --- !u!1 &123235802
 GameObject:
   m_ObjectHideFlags: 0
@@ -13709,12 +13709,12 @@ GameObject:
   - component: {fileID: 946071197}
   - component: {fileID: 946071196}
   m_Layer: 0
-  m_Name: Restart text
+  m_Name: Restart text [ggj]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &946071195
 RectTransform:
   m_ObjectHideFlags: 0

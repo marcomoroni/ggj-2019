@@ -10,11 +10,11 @@ public class EasyRestarter : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKey("r"))
+		if (Input.GetKey(KeyCode.Escape))
 		{
 			timeRestartButtonHasBeenPressed += Time.deltaTime;
 		}
-		else if (Input.GetKeyUp("r"))
+		else if (Input.GetKeyUp(KeyCode.Escape))
 		{
 			timeRestartButtonHasBeenPressed = 0;
 		}
@@ -22,7 +22,7 @@ public class EasyRestarter : MonoBehaviour
 		if (timeRestartButtonHasBeenPressed > timeNeeded)
 		{
 			//Application.LoadLevel(Application.loadedLevel);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			SceneManager.LoadScene(0);
 		}
 	}
 }
